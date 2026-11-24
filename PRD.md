@@ -1,7 +1,6 @@
 # StepBuddy — Product Requirements Document
 
-> **Status:** Draft · **Version:** 0.1 · **Owner:** Pix  
-> **Product:** StepBuddy · **Last updated:** 2026-11-24
+> **Status:** Draft · **Version:** 0.1 
 
 ## 1. Product summary
 
@@ -343,26 +342,3 @@ Targets are prototype acceptance criteria, not claims of proven performance. Run
 - What confidence threshold is required before rendering a target highlight?
 - What rate limit and family-code rotation policy is appropriate for the pilot?
 - What is the maximum acceptable per-user/per-month cost if free-tier availability changes?
-
----
-
-## Appendix A — Suggested repository structure
-
-```text
-stepbuddy/
-├── README.md
-├── docs/
-│   ├── PRD.md
-│   ├── user-flow.md          # optional if diagrams grow
-│   ├── architecture.md       # optional if architecture evolves
-│   └── decisions/            # ADRs for significant technical choices
-├── app/
-├── components/
-├── lib/
-│   ├── ai/
-│   ├── safety/
-│   └── validation/
-└── ...
-```
-
-Keep the main PRD as the product source of truth. Move detailed technical diagrams or architecture decision records into separate docs only when they become too large or change independently.
