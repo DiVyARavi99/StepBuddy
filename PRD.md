@@ -221,26 +221,47 @@ The browser handles the interface and local media preparation. A server-side API
 
 ```mermaid
 flowchart TB
-  subgraph Browser[Parent's browser]
-    UI[Next.js UI]
-    IMG[Resize/compress screenshot]
-    MIC[Record audio]
-    TTS[Browser speech synthesis]
+  subgraph Browser["Parent's browser"]
+    UI["Next.js UI"]
+    IMG["Resize and compress screenshot"]
+    MIC["Record and convert audio"]
+    TXT["Text question"]
+    TTS["Browser speech synthesis"]
+    STEP["Display step and highlight target"]
+
     UI --> IMG
     UI --> MIC
-    UI --> TTS
+    UI --> TXT
   end
-  subgraph Vercel[Vercel server]
-    MW[Access check + rate limit]
-    API[/api/help]
-    VAL[Validate input and tool output]
-    MW --> API --> VAL
+
+  subgraph Vercel["Vercel server"]
+    MW["Middleware: access check"]
+    API["API route: /api/help"]
+    RL["Rate limiting"]
+    IV["Validate request"]
+    AG["Agent orchestration"]
+    OV["Validate AI output"]
+
+    MW --> API
+    API --> RL
+    RL --> IV
+    IV --> AG
+    AG --> OV
   end
-  AI[Multimodal AI provider]
-  IMG -->|current screenshot| MW
-  MIC -->|short audio| MW
-  VAL <-->|structured request/response| AI
-  VAL -->|step, risk, coordinates| UI
+
+  AI["Multimodal AI provider"]
+
+  IMG -->|"Screenshot"| MW
+  MIC -->|"Audio clip"| MW
+  TXT -->|"Question"| MW
+
+  AG <-->|"Prompt, context, tool calls"| AI
+
+  OV -->|"Validated step, risk, coordinates"| UI
+  UI --> STEP
+  UI --> TTS
+
+  STEP -->|"Parent completes step"| UI
 ```
 
 **Data handling:** The browser retains the active session in memory/session state. The server should not persist screenshots, audio, or chat history. Requests may still be processed or retained by the AI provider according to its current terms; confirm those terms and communicate them accurately.
