@@ -1,6 +1,4 @@
-# StepBuddy — Product Requirements Document
-
-> **Status:** Draft · **Version:** 0.1 
+ StepBuddy — Product Requirements Document
 
 ## 1. Product summary
 
