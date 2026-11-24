@@ -1,4 +1,4 @@
- StepBuddy — Product Requirements Document
+# StepBuddy — Product Requirements Document
 
 ## 1. Product summary
 
